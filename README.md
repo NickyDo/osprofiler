@@ -8,7 +8,7 @@ Therefore, something works too slow and complicated to understand what exactly g
 * Enable Osprofiler
   * Redis
     * [Install redis](/redis.md)
-    * Configure Osprofiler for services
+    * [Configure Osprofiler for services](/redis-config-os.md)
   * jaeger
     * Install jaeger
     * Configure Osprofiler for services
