@@ -6,6 +6,7 @@ Therefore, something works too slow and complicated to understand what exactly g
 * [Install Osprofiler](/setup.md)
 * [Install devstack](/devstack.md)
 * Enable Osprofiler
+  * [Background](/init-os.md)
   * Redis
     * [Install redis](/redis.md)
     * [Configure Osprofiler for services](/redis-config-os.md)
@@ -13,3 +14,7 @@ Therefore, something works too slow and complicated to understand what exactly g
     * [Install jaeger](/jaeger.md)
     * [Configure Osprofiler for services](/jaeger-config-os.md)
 * Trace and work
+  * Trace
+      * [Five ways to add a new trace point](/add-trace.md)
+  * work
+      * [How does it work](/trace-work.md)
