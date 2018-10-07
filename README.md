@@ -3,8 +3,8 @@ Openstack consists of multiple project, problem is when processing some request 
 
 Therefore, something works too slow and complicated to understand what exactly goes wrong and to locate the bottleneck. That why, to resolve this issue, osprofiler which is powerful library, that is going to be used by all openstack project and their python clients. It generates 1 trace / request, go through all involved services, and builds a tree of calls 
 
-* [Install Osprofiler](/setup.md)
 * [Install devstack](/devstack.md)
+* [Install Osprofiler](/setup.md)
 * Enable Osprofiler
   * [Background](/init-os.md)
   * Redis
