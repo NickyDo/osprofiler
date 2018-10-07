@@ -13,6 +13,7 @@ Therefore, something works too slow and complicated to understand what exactly g
   * jaeger
     * [Install jaeger](/jaeger.md)
     * [Configure Osprofiler for services](/jaeger-config-os.md)
+* [Interface result](/interface-result.md)
 * Trace and work
   * Trace
       * [Five ways to add a new trace point](/add-trace.md)
