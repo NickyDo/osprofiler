@@ -11,7 +11,7 @@ Services: Nova, keystone, glance, cinder
 enabled = true
 trace_sqlalchemy = true
 connection_string = redis://localhost:6379
-hmac_keys = 123
+hmac_keys = your encryption
 ```
 `With keystone: trace_sqlalchemy = false`
 ### Step 3-Restart services

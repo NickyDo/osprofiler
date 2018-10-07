@@ -11,7 +11,7 @@ Services: Nova, keystone, glance, cinder
 enabled = true
 trace_sqlalchemy = true
 connection_string = jaeger://localhost:6831
-hmac_keys = 123
+hmac_keys = your encryption
 ```
 `With keystone: trace_sqlalchemy = false`
 ### Step 3-Restart services
