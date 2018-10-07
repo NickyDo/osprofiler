@@ -24,3 +24,6 @@ The fields are defined as the following:
 * parent_id - <uuid> of parent trace point
 * trace_id - <uuid> of current trace point
 * info - the dictionary that contains user information passed when calling profiler start() & stop() methods.
+
+## How to initialize profiler, to get one trace across all services?
+To enable cross service profiling we actually need to do send `(base_id & trace_id)` from caller to callee. So callee will be able to init its profiler with these values.
