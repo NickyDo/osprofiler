@@ -27,3 +27,8 @@ The fields are defined as the following:
 
 ## How to initialize profiler, to get one trace across all services?
 To enable cross service profiling we actually need to do send `(base_id & trace_id)` from caller to callee. So callee will be able to init its profiler with these values.
+
+In case of OpenStack, to interact between 2 services, what we need is to:
+
+- Put in python clients headers with trace info (if profiler is inited)
+
