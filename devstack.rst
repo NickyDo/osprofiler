@@ -36,6 +36,7 @@ RABBIT_PASSWORD=$ADMIN_PASSWORD
 SERVICE_PASSWORD=$ADMIN_PASSWORD
 ```
 * For local virtual machine]
+
 .. _For local virtual machine: /vm.md
 
 * To use Redis collector:
