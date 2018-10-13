@@ -1,19 +1,24 @@
-## Get login information
+=====================
+Get login information
+=====================
 
-### Step 1
+Step 1
+------
 Change to the devstack directory:
 ```bash
 cd devstack/
 ```
 
-### Step 2
+Step 2
+------
 Type `source openrc admin admin` - to get login information with admin rights.
 This is needed because the openstack client will use it to log on and run command.
 ```bash
 $ source openrc admin admin
 ```
-
-## How to get trace
+================
+How to get trace
+================
 ```bash
 openstack --os-profile 'hmac_keys' image list
 ```

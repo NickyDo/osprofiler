@@ -1,4 +1,6 @@
-# Five ways to add a new trace point
+==================================
+Five ways to add a new trace point
+==================================
 ```bash
 from osprofiler import profiler
 

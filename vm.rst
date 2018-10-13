@@ -1,9 +1,13 @@
-## Step 1
+======
+Step 1
+======
 Change to the devstack directory:
 ```bash
 cd devstack/
 ```
-## Step 2
+======
+Step 2
+======
 Determine your IP address:
 ```bash
 sudo ifconfig
@@ -29,8 +33,9 @@ lo     Link encap:Local Loopback
        RX bytes:89805124 (89.8 MB)  TX bytes:89805124 (89.8 MB)
 ```
 You’re looking for the addr: value in an interface other than lo.  For example, in this case, it’s 10.0.2.15.  Make note of that for the next step. If you run your VM on the cloud, make sure to use the public IP of your VM in the link.
-
-## Step 3
+======
+Step 3
+======
 Create the local.conf file with 4 passwords and your host IP, which you determined in the last step:
 ```bash
 cat >  local.conf <<EOF

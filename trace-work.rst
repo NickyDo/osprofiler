@@ -7,7 +7,9 @@ profiler.start("child_point")
 profiler.stop()
 profiler.stop()
 ```
-### Trace points contain 2 messages (start and stop).
+=================================================
+Trace points contain 2 messages (start and stop).
+=================================================
  Messages like below are sent to a collector:
  ```bash
  {

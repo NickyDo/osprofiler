@@ -1,4 +1,6 @@
-## Step 1 - Installing and Configuring Redis
+=========================================
+Step 1 - Installing and Configuring Redis
+=========================================
 In order to get the latest version of Redis, we will use apt to install it from the official Ubuntu repositories.
 
 Update your local apt package cache and install Redis by typing:
@@ -36,8 +38,9 @@ That’s the only change you need to make to the Redis configuration file at thi
 sudo systemctl restart redis.service
 ```
 With that, you’ve installed and configured Redis and it’s running on your machine. Before you begin using it, though, it’s prudent to first check whether Redis is functioning correctly.
-
-## Step 2 - Testing Redis
+======================
+Step 2 - Testing Redis
+======================
 As with any newly-installed software, it’s a good idea to ensure that Redis is functioning as expected before making any further changes to its configuration. We will go over a handful of ways to check that Redis is working correctly in this step.
 
 Start by checking that the Redis service is running:
