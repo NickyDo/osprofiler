@@ -37,7 +37,9 @@ SERVICE_PASSWORD=$ADMIN_PASSWORD
 ```
 * For local virtual machine]
 
-.. _For local virtual machine: /vm.md
+.. _For local virtual machine:: /vm.md
+.. For local virtual machine:: /vm.md
+
 
 * To use Redis collector:
 
