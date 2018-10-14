@@ -1,3 +1,11 @@
+You need to put tracepoint to each function of service to enable OS profiler functionality
+* Core function services Nova, keystone, neutron, cinder, glance
+eg:+ suppose that we have 3 services A, B, C, service A have function A, B have function B,
+C have function C; request come into service A, function A call function B, function B call function C.
+each function will have tracepoint 
+when the request passes the tracepoint, it calls `notifier` that is defied in OS provider source code
+and what notifier does is to store data like timestamp, name of service that cause notifier and so on to the trace database (redis, jaeger tracing, mongoDB, elasticSearch, loginsite)
+
 Every call of profiler.start() & profiler.stop() sends to collector 1 message. It means that every trace point creates 2 records in the collector. 
 
 E.g.: The sample below produces 2 trace points:
