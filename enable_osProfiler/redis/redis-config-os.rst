@@ -14,22 +14,22 @@ Step 1-location of files config:
 Step 2-Adding content to files service
 --------------------------------------
 
-``
-[profiler]
-enabled = true
-trace_sqlalchemy = true
-connection_string = redis://localhost:6379
-hmac_keys = your encryption
-``
+::
+    [profiler]
+    enabled = true
+    trace_sqlalchemy = true
+    connection_string = redis://localhost:6379
+    hmac_keys = your encryption
+
 
 `With keystone: trace_sqlalchemy = false`
 
 Step 3-Restart services
 -----------------------
 
-``
-sudo systemctl restart <service-name>
-``
+::
+    sudo systemctl restart <service-name>
+
 
 replacing `<service-name>` by the corresponding name:
 * Nova: devstack@n-api.service

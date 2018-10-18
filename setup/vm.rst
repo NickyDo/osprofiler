@@ -2,16 +2,16 @@
 Step 1
 ======
 Change to the devstack directory:
-``
-cd devstack/
-``
+::
+    cd devstack/
+
 ======
 Step 2
 ======
 Determine your IP address:
-``
-sudo ifconfig
-``
+::
+    sudo ifconfig
+
 You will see a response something like this:
 ::
     enp0s3 Link encap:Ethernet  HWaddr 08:00:27:ea:97:9f  
