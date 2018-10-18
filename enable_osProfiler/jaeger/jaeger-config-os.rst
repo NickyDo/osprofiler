@@ -12,18 +12,18 @@ Step 1-location of files config:
 
 Step 2-Adding content to files service
 --------------------------------------
-```ini
+``
 [profiler]
 enabled = true
 trace_sqlalchemy = true
 connection_string = jaeger://localhost:6831
 hmac_keys = your encryption
-```
+``
 `With keystone: trace_sqlalchemy = false`
 ### Step 3-Restart services
-```bash
+``
 sudo systemctl restart <service-name>
-```
+``
 replacing `<service-name>` by the corresponding name:
 * Nova: devstack@n-api.service
 * Keystone: devstack@keystone.service

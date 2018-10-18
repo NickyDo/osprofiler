@@ -2,18 +2,18 @@
 Step 1
 ======
 Change to the devstack directory:
-```bash
+``
 cd devstack/
-```
+``
 ======
 Step 2
 ======
 Determine your IP address:
-```
+``
 sudo ifconfig
-```
+``
 You will see a response something like this:
-```bash
+``
 enp0s3 Link encap:Ethernet  HWaddr 08:00:27:ea:97:9f  
        inet addr:10.0.2.15  Bcast:10.0.2.255  Mask:255.255.255.0
        inet6 addr: fe80::d715:6025:f469:6f7c/64 Scope:Link
@@ -31,7 +31,8 @@ lo     Link encap:Local Loopback
        TX packets:229208 errors:0 dropped:0 overruns:0 carrier:0
        collisions:0 txqueuelen:1000
        RX bytes:89805124 (89.8 MB)  TX bytes:89805124 (89.8 MB)
-```
+``
+
 You’re looking for the addr: value in an interface other than lo.  For example, in this case, it’s 10.0.2.15.  Make note of that for the next step. If you run your VM on the cloud, make sure to use the public IP of your VM in the link.
 ======
 Step 3

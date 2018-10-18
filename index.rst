@@ -9,6 +9,7 @@ Therefore, something works too slow and complicated to understand what exactly g
 It can trace and categorize WSGI, RPC, DB calls
 
 A trace contains:
+~~~~~~~~~~~~~~~~~
 * Call hierachy
 * Time spent in each service/methods
 * Projects/services information
@@ -27,21 +28,21 @@ Why Osprofiler
 Treetop
 -------
 * setup
-  * devstack.rst
-  * setup.rst
-  * vm.rst
+    * devstack.rst
+    * setup.rst
+    * vm.rst 
 * enable_osProfiler
-  * init-os.rst
-  * redis
-    * redis.rst
-    * redis-config-os.rst
-  * jaeger
-    * jaeger.rst
-    * jaeger-config-os.rst
+    * init-os.rst
+    * redis
+        * redis.rst
+        * redis-config-os.rst
+    * jaeger
+        * jaeger.rst
+        * jaeger-config-os.rst
 * Interface result.rst
 * Trace_work
-  * add-trace.rst
-  * trace-word.rst
+    * add-trace.rst
+    * trace-word.rst
     
 
 
