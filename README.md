@@ -28,16 +28,16 @@ It can trace and categorize WSGI, RPC, DB calls
 
 * setup
   * [devstack.rst](/setup/devstack.rst)
-    * [setup.rst](/setup/setup.rst)
-    * [vm.rst](/setup/vm.rst) 
+  * [setup.rst](/setup/setup.rst)
+  * [vm.rst](/setup/vm.rst) 
 * enable_osProfiler
   * [init-os.rst](/enable_osProfiler/init-os.rst)
-    * redis
-      * [redis.rst](/enable_osProfiler/redis/redis.rst)
-      * [redis-config-os.rst](/enable_osProfiler/redis/redis-config-os.rst)
-    * jaeger
-      * [jaeger.rst](/enable_osProfiler/jaeger/jaeger.rst)
-      * [jaeger-config-os.rst](/enable_osProfiler/jaeger/jaeger-config-os.rst)
+  * redis
+    * [redis.rst](/enable_osProfiler/redis/redis.rst)
+    * [redis-config-os.rst](/enable_osProfiler/redis/redis-config-os.rst)
+  * jaeger
+    * [jaeger.rst](/enable_osProfiler/jaeger/jaeger.rst)
+    * [jaeger-config-os.rst](/enable_osProfiler/jaeger/jaeger-config-os.rst)
 * [Interface-result.rst](/interface-result.rst)
 * Trace_work
   * [add-trace.rst](/trace_work/add-trace.rst)
