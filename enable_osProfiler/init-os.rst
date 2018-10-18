@@ -18,7 +18,6 @@ Possible values:
 * loginsight://username:password@host - use LogInsight as trace collector/storage
 
 OSProfiler now contains various storage drivers to collect tracing data. Information about what driver to use and what options to pass to OSProfiler are now stored in OpenStack services configuration files. Example of such configuration can be found below:
-
 ::
     [profiler]
     enabled = True
@@ -28,7 +27,6 @@ OSProfiler now contains various storage drivers to collect tracing data. Informa
 
 
 If such configuration is provided, OSProfiler setting up can be processed in following way:
-
 ::
     if CONF.profiler.enabled:
         osprofiler_initializer.init_from_conf(

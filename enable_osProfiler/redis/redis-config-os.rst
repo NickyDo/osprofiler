@@ -7,13 +7,12 @@ Step 1-location of files config:
 --------------------------------
 
 * Nova: /etc/nova/nova.conf
-* Keystone: /etc/keystone/keystone.conf
+* Keystone: /etc/keystone/keystone.conf <neglected>
 * Cinder: /etc/cinder/cinder.conf
 * Glance: /etc/glance/glance-api.conf
 
 Step 2-Adding content to files service
 --------------------------------------
-
 ::
     [profiler]
     enabled = true
@@ -26,7 +25,6 @@ Step 2-Adding content to files service
 
 Step 3-Restart services
 -----------------------
-
 ::
     sudo systemctl restart <service-name>
 

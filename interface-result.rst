@@ -19,7 +19,6 @@ This is needed because the openstack client will use it to log on and run comman
 ================
 How to get trace
 ================
-
 ::
     openstack --os-profile 'hmac_keys' image list
 
@@ -33,6 +32,5 @@ To make it easier for end users to work with profiler from CLI, OSProfiler has e
     $ osprofiler trace show <trace_id> --json/--html
 
 * option --out will redirect result of osprofiler trace show in specified file:
-
 ::
     $ osprofiler trace show <trace_id> --json/--html --out /path/to/file
