@@ -14,7 +14,7 @@ Step 1-location of files config:
 Step 2-Adding content to files service
 --------------------------------------
 
-``ini
+``
 [profiler]
 enabled = true
 trace_sqlalchemy = true
