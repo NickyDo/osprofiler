@@ -9,7 +9,7 @@ cd devstack/
 Step 2
 ======
 Determine your IP address:
-```bash
+```
 sudo ifconfig
 ```
 You will see a response something like this:
@@ -37,7 +37,7 @@ You’re looking for the addr: value in an interface other than lo.  For example
 Step 3
 ======
 Create the local.conf file with 4 passwords and your host IP, which you determined in the last step:
-```bash
+``
 cat >  local.conf <<EOF
 [[local|localrc]]
 ADMIN_PASSWORD=secret
@@ -47,6 +47,6 @@ SERVICE_PASSWORD=\$ADMIN_PASSWORD
 HOST_IP=10.0.2.15
 RECLONE=yes
 EOF
-```
+``
 This is the minimum required config to get started with DevStack.
 

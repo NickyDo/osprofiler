@@ -9,7 +9,7 @@ and what notifier does is to store data like timestamp, name of service that cau
 Every call of profiler.start() & profiler.stop() sends to collector 1 message. It means that every trace point creates 2 records in the collector. 
 
 E.g.: The sample below produces 2 trace points:
-```bash
+```
 profiler.start("parent_point")
 profiler.start("child_point")
 profiler.stop()
@@ -19,7 +19,7 @@ profiler.stop()
 Trace points contain 2 messages (start and stop).
 =================================================
  Messages like below are sent to a collector:
- ```bash
+ ```
  {
     "name": <point_name>-(start|stop)
     "base_id": <uuid>,

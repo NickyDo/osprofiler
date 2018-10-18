@@ -1,7 +1,7 @@
 ==================================
 Five ways to add a new trace point
 ==================================
-```bash
+```
 from osprofiler import profiler
 
 def some_func():
