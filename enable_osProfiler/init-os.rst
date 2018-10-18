@@ -1,9 +1,11 @@
 OSProfiler can send trace data into different collectors which're controled by 2 params:
 .# `OSPROFILER_COLLECTOR` specifies which collector to install in Devstack. OSProfiler plugin does not install anything by dafault,
 thus default messaging driver will be used
+
 Possible value:
-*  `<emty> ` - default messaging driver is used
-*  `redis` - Redis is installed
+
+* `<emty> ` - default messaging driver is used
+* `redis` - Redis is installed
 The default value of OSPROFILER_CONNECTION_STRING is set automatically depending on OSPROFILER_COLLECTOR value.
 
 .# `OSPROFILER_CONNECTION_STRING` specifies which driver is used by OSProfiler.

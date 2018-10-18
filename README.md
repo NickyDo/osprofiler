@@ -41,7 +41,7 @@ It can trace and categorize WSGI, RPC, DB calls
 * [Interface-result.rst](/interface-result.rst)
 * Trace_work
   * [add-trace.rst](/trace_work/add-trace.rst)
-  * [trace-word.rst](/trace_work/trace_work.rst)
+  * [trace-word.rst](/trace_work/trace-work.rst)
     
 
 
