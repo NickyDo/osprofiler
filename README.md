@@ -28,21 +28,21 @@ Why Osprofiler
 Treetop
 -------
 * setup
-    * devstack.rst
-    * setup.rst
-    * vm.rst 
+    * [devstack.rst](/setup/devstack.rst)
+    * [setup.rst](/setup/setup.rst)
+    * [vm.rst](/setup/vm.rst) 
 * enable_osProfiler
-    * init-os.rst
+    * [init-os.rst](/enable_osProfiler/init-os.rst)
     * redis
-        * redis.rst
-        * redis-config-os.rst
+        * [redis.rst](/enable_osProfiler/redis/redis.rst)
+        * [redis-config-os.rst](/enable_osProfiler/redis/redis-config-os.rst)
     * jaeger
-        * jaeger.rst
-        * jaeger-config-os.rst
-* interface-result.rst
+        * [jaeger.rst](/enable_osProfiler/jaeger/jaeger.rst)
+        * [jaeger-config-os.rst](/enable_osProfiler/jaeger/jaeger-config-os.rst)
+* [Interface-result.rst](/interface-result.rst)
 * Trace_work
-    * add-trace.rst
-    * trace-word.rst
+    * [add-trace.rst](/trace_work/add-trace.rst)
+    * [trace-word.rst](/trace_work/trace_work.rst)
     
 
 
