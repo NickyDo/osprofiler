@@ -1,0 +1,167 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>osprofiler &#8212; osProfiler 2018 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Setup" href="setup.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="osprofiler">
+<h1>osprofiler<a class="headerlink" href="#osprofiler" title="Permalink to this headline">¶</a></h1>
+<p>Openstack consists of multiple project, problem is when processing some request such as booting a virtual machine, openstack have to uses multiple services from different project.</p>
+<p>Therefore, something works too slow and complicated to understand what exactly goes wrong and to locate the bottleneck. That why, to resolve this issue, osprofiler which is powerful library (A small distributed tracing library for Openstack service
+), that is going to be used by all openstack project and their python clients. It generates 1 trace / request, go through all involved services, and builds a tree of calls; Otherwise, It can generate trace report in: HTML/JSON/DOT.</p>
+<p>It can trace and categorize WSGI, RPC, DB calls</p>
+<div class="section" id="a-trace-contains">
+<h2>A trace contains:<a class="headerlink" href="#a-trace-contains" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Call hierachy</li>
+<li>Time spent in each service/methods</li>
+<li>Projects/services information</li>
+<li>Logging/debugging information</li>
+</ul>
+<div class="section" id="why-osprofiler">
+<h3>Why Osprofiler<a class="headerlink" href="#why-osprofiler" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>We do not want tight coupling with a non-OpenStack solution</li>
+<li>We should be able to enable or disable tracing without restarting the services</li>
+<li>We should be able to enable tracing for specific API request</li>
+<li>Only certain users should be able to enable tracing</li>
+<li>It should be easy to integrate with OpenStack project</li>
+<li>There is no need to include all methods in the trace</li>
+</ul>
+</div>
+<div class="section" id="table-of-contents">
+<h3>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#install-devstack-extended">Install devstack &lt;extended&gt;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#install-osprofiler">Install Osprofiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#install-openstack-client">Install OpenStack Client</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="enable-os.html">Enable osProfiler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enable-os.html#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enable-os.html#redis">Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enable-os.html#config-services-for-redis">Config services for redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enable-os.html#jaeger">Jaeger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enable-os.html#config-services-for-jaeger">Config services for jaeger</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interface-result.html">Get result</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interface-result.html#get-login-information">Get login information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface-result.html#how-to-get-trace">How to get trace</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="add-trace.html">Five ways to add a new trace point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace-work.html">trace-work</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="what-points-should-be-traced-by-default">
+<h3>What points should be traced by default?<a class="headerlink" href="#what-points-should-be-traced-by-default" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>All HTTP calls - helps to get information about: what HTTP requests were done, duration of calls (latency of service), information about projects involved in request.</li>
+<li>All RPC calls - helps to understand duration of parts of request related to different services in one project. This information is essential to understand which service produce the bottleneck.</li>
+<li>All DB API calls - in some cases slow DB query can produce bottleneck. So it’s quite useful to track how much time request spend in DB layer.</li>
+<li>All driver calls - in case of nova, cinder and others we have vendor drivers. Duration</li>
+<li>ALL SQL requests (turned off by default, because it produce a lot of traffic)</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">osProfiler</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enable-os.html">Enable osProfiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface-result.html">Get result</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add-trace.html">Five ways to add a new trace point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace-work.html">trace-work</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="setup.html" title="next chapter">Setup</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, tadt.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

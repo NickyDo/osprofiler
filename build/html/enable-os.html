@@ -1,0 +1,283 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Enable osProfiler &#8212; osProfiler 2018 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Get result" href="interface-result.html" />
+    <link rel="prev" title="Setup" href="setup.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="enable-osprofiler">
+<h1>Enable osProfiler<a class="headerlink" href="#enable-osprofiler" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>OSProfiler can send trace data into different collectors which’re controled by 2 params:
+.# <cite>OSPROFILER_COLLECTOR</cite> specifies which collector to install in Devstack. OSProfiler plugin does not install anything by dafault,
+thus default messaging driver will be used</p>
+<p>Possible value:</p>
+<ul class="simple">
+<li><a href="#id1"><span class="problematic" id="id2">`</span></a>&lt;emty&gt; ` - default messaging driver is used</li>
+<li><cite>redis</cite> - Redis is installed</li>
+</ul>
+<p>The default value of OSPROFILER_CONNECTION_STRING is set automatically depending on OSPROFILER_COLLECTOR value.</p>
+<p>.# <cite>OSPROFILER_CONNECTION_STRING</cite> specifies which driver is used by OSProfiler.</p>
+<p>Possible values:</p>
+<ul class="simple">
+<li>messaging:// - use messaging as trace collector (with the transport configured by oslo.messaging)</li>
+<li>redis://[:password]&#64;host[:port][/db] - use Redis as trace storage</li>
+<li>jaeger://[:password]&#64;host[:port][/db] - use jaeger as trace storage</li>
+<li>elasticsearch://host:port - use Elasticsearch as trace storage</li>
+<li>mongodb://host:port - use MongoDB as trace storage</li>
+<li>loginsight://username:password&#64;host - use LogInsight as trace collector/storage</li>
+</ul>
+<p>OSProfiler now contains various storage drivers to collect tracing data. Information about what driver to use and what options to pass to OSProfiler are now stored in OpenStack services configuration files. Example of such configuration can be found below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">profiler</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">trace_sqlalchemy</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">hmac_keys</span> <span class="o">=</span> <span class="n">SECRET_KEY</span>
+<span class="n">connection_string</span> <span class="o">=</span> <span class="n">messaging</span><span class="p">:</span><span class="o">//</span>
+</pre></div>
+</div>
+<p>If such configuration is provided, OSProfiler setting up can be processed in following way:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">CONF</span><span class="o">.</span><span class="n">profiler</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
+    <span class="n">osprofiler_initializer</span><span class="o">.</span><span class="n">init_from_conf</span><span class="p">(</span>
+        <span class="n">conf</span><span class="o">=</span><span class="n">CONF</span><span class="p">,</span>
+        <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">get_admin_context</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+        <span class="n">project</span><span class="o">=</span><span class="s2">&quot;cinder&quot;</span><span class="p">,</span>
+        <span class="n">service</span><span class="o">=</span><span class="n">binary</span><span class="p">,</span>
+        <span class="n">host</span><span class="o">=</span><span class="n">host</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="redis">
+<h2>Redis<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="why-redis">
+<h3>Why Redis<a class="headerlink" href="#why-redis" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Fast</li>
+<li>Non-persistent</li>
+<li>Automatic garbage collection ASAP using Redis built-in TTL</li>
+<li>Memory-efficient</li>
+</ul>
+<p>Read more: <a class="reference external" href="https://redislabs.com/why-redis/">https://redislabs.com/why-redis/</a></p>
+</div>
+<div class="section" id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p>Read more: <a class="reference external" href="https://redis.io/topics/quickstart">https://redis.io/topics/quickstart</a></p>
+</div>
+</div>
+<div class="section" id="config-services-for-redis">
+<h2>Config services for redis<a class="headerlink" href="#config-services-for-redis" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Services: Nova, keystone, glance, cinder</li>
+</ul>
+<div class="section" id="step-1-location-of-files-config">
+<h3>Step 1-location of files config:<a class="headerlink" href="#step-1-location-of-files-config" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Nova: /etc/nova/nova.conf</li>
+<li>Keystone: /etc/keystone/keystone.conf &lt;neglected&gt;</li>
+<li>Cinder: /etc/cinder/cinder.conf</li>
+<li>Glance: /etc/glance/glance-api.conf</li>
+</ul>
+</div>
+<div class="section" id="step-2-adding-content-to-files-service">
+<h3>Step 2-Adding content to files service<a class="headerlink" href="#step-2-adding-content-to-files-service" title="Permalink to this headline">¶</a></h3>
+<p>Insert:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">profiler</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">trace_sqlalchemy</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">connection_string</span> <span class="o">=</span> <span class="n">redis</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">6379</span>
+<span class="n">hmac_keys</span> <span class="o">=</span> <span class="n">your</span> <span class="n">encryption</span>
+</pre></div>
+</div>
+<p><cite>With keystone: trace_sqlalchemy = false</cite></p>
+</div>
+<div class="section" id="step-3-restart-services">
+<h3>Step 3-Restart services<a class="headerlink" href="#step-3-restart-services" title="Permalink to this headline">¶</a></h3>
+<p>Command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">restart</span> <span class="o">&lt;</span><span class="n">service</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>replacing <cite>&lt;service-name&gt;</cite> by the corresponding name:
+* Nova: <a class="reference external" href="mailto:devstack&#37;&#52;&#48;n-api&#46;service">devstack<span>&#64;</span>n-api<span>&#46;</span>service</a>
+* Keystone: <a class="reference external" href="mailto:devstack&#37;&#52;&#48;keystone&#46;service">devstack<span>&#64;</span>keystone<span>&#46;</span>service</a> &lt;neglected&gt;
+* Cinder: <a class="reference external" href="mailto:devstack&#37;&#52;&#48;c-api&#46;service">devstack<span>&#64;</span>c-api<span>&#46;</span>service</a>
+* Glance: <a class="reference external" href="mailto:devstack&#37;&#52;&#48;g-api&#46;service">devstack<span>&#64;</span>g-api<span>&#46;</span>service</a></p>
+</div>
+</div>
+<div class="section" id="jaeger">
+<h2>Jaeger<a class="headerlink" href="#jaeger" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="why-jaeger">
+<h3>Why jaeger<a class="headerlink" href="#why-jaeger" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>High Scalability</li>
+<li>Native support for OpenTracing</li>
+<li>Multiple storage backends</li>
+<li>Modern Web UI</li>
+<li>Cloud Native Deployment</li>
+<li>Observability</li>
+<li>Backwards compatibility with Zipkin</li>
+</ul>
+<ul class="simple">
+<li>More detail: read <cite>https://github.com/jaegertracing/jaeger</cite></li>
+</ul>
+</div>
+<div class="section" id="start-jaeger">
+<h3>Start Jaeger<a class="headerlink" href="#start-jaeger" title="Permalink to this headline">¶</a></h3>
+<p>We will be using an open source distributed tracing system Jaeger to collect and view the traces and analyze the application’s behavior. Let’s run Jaeger backend as an all-in-one Docker image (see up to date instructions):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">p6831</span><span class="p">:</span><span class="mi">6831</span><span class="o">/</span><span class="n">udp</span> <span class="o">-</span><span class="n">p16686</span><span class="p">:</span><span class="mi">16686</span> <span class="n">jaegertracing</span><span class="o">/</span><span class="nb">all</span><span class="o">-</span><span class="ow">in</span><span class="o">-</span><span class="n">one</span><span class="p">:</span><span class="n">latest</span>
+</pre></div>
+</div>
+<p>Once the container starts, open <a class="reference external" href="http://127.0.0.1:16686/">http://127.0.0.1:16686/</a> in the browser to access the Jaeger UI.</p>
+</div>
+<div class="section" id="install-jaeger-client">
+<h3>Install Jaeger-client<a class="headerlink" href="#install-jaeger-client" title="Permalink to this headline">¶</a></h3>
+<p>Command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">jaeger</span><span class="o">-</span><span class="n">client</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="config-services-for-jaeger">
+<h2>Config services for jaeger<a class="headerlink" href="#config-services-for-jaeger" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Services: Nova, keystone, glance, cinder</li>
+</ul>
+<div class="section" id="id3">
+<h3>Step 1-location of files config:<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Nova: /etc/nova/nova.conf</li>
+<li>Keystone: /etc/keystone/keystone.conf &lt;neglected&gt;</li>
+<li>Cinder: /etc/cinder/cinder.conf</li>
+<li>Glance: /etc/glance/glance-api.conf</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>Step 2-Adding content to files service:<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>Insert:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">profiler</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">trace_sqlalchemy</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">connection_string</span> <span class="o">=</span> <span class="n">jaeger</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">6831</span>
+<span class="n">hmac_keys</span> <span class="o">=</span> <span class="n">your</span> <span class="n">encryption</span>
+</pre></div>
+</div>
+<p><cite>With keystone: trace_sqlalchemy = false</cite></p>
+</div>
+<div class="section" id="id5">
+<h3>Step 3-Restart services<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>Command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">restart</span> <span class="o">&lt;</span><span class="n">service</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>replacing <cite>&lt;service-name&gt;</cite> by the corresponding name:
+* Nova: <a class="reference external" href="mailto:devstack&#37;&#52;&#48;n-api&#46;service">devstack<span>&#64;</span>n-api<span>&#46;</span>service</a>
+* Keystone: <a class="reference external" href="mailto:devstack&#37;&#52;&#48;keystone&#46;service">devstack<span>&#64;</span>keystone<span>&#46;</span>service</a>
+* Cinder: <a class="reference external" href="mailto:devstack&#37;&#52;&#48;c-api&#46;service">devstack<span>&#64;</span>c-api<span>&#46;</span>service</a>
+* Glance: <a class="reference external" href="mailto:devstack&#37;&#52;&#48;g-api&#46;service">devstack<span>&#64;</span>g-api<span>&#46;</span>service</a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">osProfiler</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Enable osProfiler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#redis">Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#config-services-for-redis">Config services for redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jaeger">Jaeger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#config-services-for-jaeger">Config services for jaeger</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interface-result.html">Get result</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add-trace.html">Five ways to add a new trace point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace-work.html">trace-work</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="setup.html" title="previous chapter">Setup</a></li>
+      <li>Next: <a href="interface-result.html" title="next chapter">Get result</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, tadt.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/enable-os.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

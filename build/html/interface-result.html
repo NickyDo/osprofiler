@@ -1,0 +1,154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Get result &#8212; osProfiler 2018 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Five ways to add a new trace point" href="add-trace.html" />
+    <link rel="prev" title="Enable osProfiler" href="enable-os.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="get-result">
+<h1>Get result<a class="headerlink" href="#get-result" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="get-login-information">
+<h2>Get login information<a class="headerlink" href="#get-login-information" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Step 1</li>
+</ul>
+<p>Change to the devstack directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">devstack</span><span class="o">/</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Step 2</li>
+</ul>
+<p>Type <cite>source openrc admin admin</cite> - to get login information with admin rights.
+This is needed because the openstack client will use it to log on and run command.
+Command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ source openrc admin admin
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-get-trace">
+<h2>How to get trace<a class="headerlink" href="#how-to-get-trace" title="Permalink to this headline">¶</a></h2>
+<p>Command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openstack</span> <span class="o">--</span><span class="n">os</span><span class="o">-</span><span class="n">profile</span> <span class="s1">&#39;hmac_keys&#39;</span> <span class="n">image</span> <span class="nb">list</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>–os-profile: The option to pass the encoding key set in front, your encryption</li>
+<li>‘hmac_keys’ = encryption key in config services</li>
+</ul>
+<p>To make it easier for end users to work with profiler from CLI, OSProfiler has entry point that allows them to retrieve information about traces and present it in human readable form. In this case, we have:
+* Results of profiling can be obtained in JSON (option: –json) and HTML (option: –html) formats:
+Command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ osprofiler trace show &lt;trace_id&gt; --json/--html
+</pre></div>
+</div>
+<ul class="simple">
+<li>option –out will redirect result of osprofiler trace show in specified file:</li>
+</ul>
+<p>Command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ osprofiler trace show &lt;trace_id&gt; --json/--html --out /path/to/file
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">osProfiler</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enable-os.html">Enable osProfiler</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Get result</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#get-login-information">Get login information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-get-trace">How to get trace</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="add-trace.html">Five ways to add a new trace point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace-work.html">trace-work</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="enable-os.html" title="previous chapter">Enable osProfiler</a></li>
+      <li>Next: <a href="add-trace.html" title="next chapter">Five ways to add a new trace point</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, tadt.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/interface-result.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

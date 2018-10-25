@@ -1,0 +1,200 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Setup &#8212; osProfiler 2018 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Enable osProfiler" href="enable-os.html" />
+    <link rel="prev" title="osprofiler" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-devstack-extended">
+<h2>Install devstack &lt;extended&gt;<a class="headerlink" href="#install-devstack-extended" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
+<p>read more: <a class="reference external" href="https://docs.openstack.org/devstack/latest/">https://docs.openstack.org/devstack/latest/</a></p>
+</div>
+<div class="section" id="for-local-virtual-machine">
+<h3>For local virtual machine<a class="headerlink" href="#for-local-virtual-machine" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Step 1</li>
+</ul>
+<p>Change to the devstack directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">devstack</span><span class="o">/</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Step 2</li>
+</ul>
+<p>Determine your IP address:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">ifconfig</span>
+</pre></div>
+</div>
+<p>You will see a response something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">enp0s3</span> <span class="n">Link</span> <span class="n">encap</span><span class="p">:</span><span class="n">Ethernet</span>  <span class="n">HWaddr</span> <span class="mi">08</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="n">ea</span><span class="p">:</span><span class="mi">97</span><span class="p">:</span><span class="mi">9</span><span class="n">f</span>
+    <span class="n">inet</span> <span class="n">addr</span><span class="p">:</span><span class="mf">10.0</span><span class="o">.</span><span class="mf">2.15</span>  <span class="n">Bcast</span><span class="p">:</span><span class="mf">10.0</span><span class="o">.</span><span class="mf">2.255</span>  <span class="n">Mask</span><span class="p">:</span><span class="mf">255.255</span><span class="o">.</span><span class="mf">255.0</span>
+    <span class="n">inet6</span> <span class="n">addr</span><span class="p">:</span> <span class="n">fe80</span><span class="p">::</span><span class="n">d715</span><span class="p">:</span><span class="mi">6025</span><span class="p">:</span><span class="n">f469</span><span class="p">:</span><span class="mi">6</span><span class="n">f7c</span><span class="o">/</span><span class="mi">64</span> <span class="n">Scope</span><span class="p">:</span><span class="n">Link</span>
+    <span class="n">UP</span> <span class="n">BROADCAST</span> <span class="n">RUNNING</span> <span class="n">MULTICAST</span>  <span class="n">MTU</span><span class="p">:</span><span class="mi">1500</span>  <span class="n">Metric</span><span class="p">:</span><span class="mi">1</span>
+    <span class="n">RX</span> <span class="n">packets</span><span class="p">:</span><span class="mi">1364291</span> <span class="n">errors</span><span class="p">:</span><span class="mi">0</span> <span class="n">dropped</span><span class="p">:</span><span class="mi">0</span> <span class="n">overruns</span><span class="p">:</span><span class="mi">0</span> <span class="n">frame</span><span class="p">:</span><span class="mi">0</span>
+    <span class="n">TX</span> <span class="n">packets</span><span class="p">:</span><span class="mi">406550</span> <span class="n">errors</span><span class="p">:</span><span class="mi">0</span> <span class="n">dropped</span><span class="p">:</span><span class="mi">0</span> <span class="n">overruns</span><span class="p">:</span><span class="mi">0</span> <span class="n">carrier</span><span class="p">:</span><span class="mi">0</span>
+    <span class="n">collisions</span><span class="p">:</span><span class="mi">0</span> <span class="n">txqueuelen</span><span class="p">:</span><span class="mi">1000</span>
+    <span class="n">RX</span> <span class="nb">bytes</span><span class="p">:</span><span class="mi">1415725472</span> <span class="p">(</span><span class="mf">1.4</span> <span class="n">GB</span><span class="p">)</span>  <span class="n">TX</span> <span class="nb">bytes</span><span class="p">:</span><span class="mi">27942474</span> <span class="p">(</span><span class="mf">27.9</span> <span class="n">MB</span><span class="p">)</span>
+
+<span class="n">lo</span>     <span class="n">Link</span> <span class="n">encap</span><span class="p">:</span><span class="n">Local</span> <span class="n">Loopback</span>
+    <span class="n">inet</span> <span class="n">addr</span><span class="p">:</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>  <span class="n">Mask</span><span class="p">:</span><span class="mf">255.0</span><span class="o">.</span><span class="mf">0.0</span>
+    <span class="n">inet6</span> <span class="n">addr</span><span class="p">:</span> <span class="p">::</span><span class="mi">1</span><span class="o">/</span><span class="mi">128</span> <span class="n">Scope</span><span class="p">:</span><span class="n">Host</span>
+    <span class="n">UP</span> <span class="n">LOOPBACK</span> <span class="n">RUNNING</span>  <span class="n">MTU</span><span class="p">:</span><span class="mi">65536</span>  <span class="n">Metric</span><span class="p">:</span><span class="mi">1</span>
+    <span class="n">RX</span> <span class="n">packets</span><span class="p">:</span><span class="mi">229208</span> <span class="n">errors</span><span class="p">:</span><span class="mi">0</span> <span class="n">dropped</span><span class="p">:</span><span class="mi">0</span> <span class="n">overruns</span><span class="p">:</span><span class="mi">0</span> <span class="n">frame</span><span class="p">:</span><span class="mi">0</span>
+    <span class="n">TX</span> <span class="n">packets</span><span class="p">:</span><span class="mi">229208</span> <span class="n">errors</span><span class="p">:</span><span class="mi">0</span> <span class="n">dropped</span><span class="p">:</span><span class="mi">0</span> <span class="n">overruns</span><span class="p">:</span><span class="mi">0</span> <span class="n">carrier</span><span class="p">:</span><span class="mi">0</span>
+    <span class="n">collisions</span><span class="p">:</span><span class="mi">0</span> <span class="n">txqueuelen</span><span class="p">:</span><span class="mi">1000</span>
+    <span class="n">RX</span> <span class="nb">bytes</span><span class="p">:</span><span class="mi">89805124</span> <span class="p">(</span><span class="mf">89.8</span> <span class="n">MB</span><span class="p">)</span>  <span class="n">TX</span> <span class="nb">bytes</span><span class="p">:</span><span class="mi">89805124</span> <span class="p">(</span><span class="mf">89.8</span> <span class="n">MB</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You’re looking for the addr: value in an interface other than lo.  For example, in this case, it’s 10.0.2.15.  Make note of that for the next step. If you run your VM on the cloud, make sure to use the public IP of your VM in the link.</p>
+<ul class="simple">
+<li>Step 3</li>
+</ul>
+<p>Create the local.conf file with 4 passwords and your host IP, which you determined in the last step:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cat &gt;  local.conf &lt;&lt;EOF
+[[local|localrc]]
+ADMIN_PASSWORD=secret
+DATABASE_PASSWORD=\$ADMIN_PASSWORD
+RABBIT_PASSWORD=\$ADMIN_PASSWORD
+SERVICE_PASSWORD=\$ADMIN_PASSWORD
+HOST_IP=10.0.2.15
+RECLONE=yes
+EOF
+</pre></div>
+</div>
+<p>This is the minimum required config to get started with DevStack.</p>
+<ul class="simple">
+<li>To use Redis collector:</li>
+</ul>
+<p>enable_plugin osprofiler <a class="reference external" href="https://git.openstack.org/openstack/osprofiler">https://git.openstack.org/openstack/osprofiler</a> master
+OSPROFILER_COLLECTOR=redis
+OSProfiler plugin will install Redis and configure OSProfiler to use Redis driver</p>
+<ul class="simple">
+<li>To use specified driver:</li>
+</ul>
+<p>enable_plugin osprofiler <a class="reference external" href="https://git.openstack.org/openstack/osprofiler">https://git.openstack.org/openstack/osprofiler</a> master
+OSPROFILER_CONNECTION_STRING=&lt;connection string value&gt;
+the driver is chosen depending on the value of OSPROFILER_CONNECTION_STRING variable (refer to the next section for details)</p>
+</div>
+</div>
+<div class="section" id="install-osprofiler">
+<h2>Install Osprofiler<a class="headerlink" href="#install-osprofiler" title="Permalink to this headline">¶</a></h2>
+<p>Osprofiler can be easily installed by using pip package</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">osprofiler</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-openstack-client">
+<h2>Install OpenStack Client<a class="headerlink" href="#install-openstack-client" title="Permalink to this headline">¶</a></h2>
+<p>After installing devstack, usually, openstackclient will be installed.
+If type ‘openstack’ not work, it can be installed via pip.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">openstackclient</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">osProfiler</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-devstack-extended">Install devstack &lt;extended&gt;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-osprofiler">Install Osprofiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-openstack-client">Install OpenStack Client</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="enable-os.html">Enable osProfiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface-result.html">Get result</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add-trace.html">Five ways to add a new trace point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace-work.html">trace-work</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">osprofiler</a></li>
+      <li>Next: <a href="enable-os.html" title="next chapter">Enable osProfiler</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, tadt.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/setup.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
